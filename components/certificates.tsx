@@ -26,28 +26,6 @@ const certificates = [
       </svg>
     ),
   },
-  {
-    id: 2,
-    title: "Master of Computer Applications (MCA)",
-    issuer: "BS Abdur Rahman Crescent Institute",
-    date: "2024",
-    description: "Advanced degree in computer science with focus on web development",
-    icon: (
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 6.253v13m0-13C6.5 6.253 2 10.998 2 17.25m20-11.002c5.5 0 10 4.748 10 11.002M4.5 15.75h15M4.75 12H20"
-        />
-      </svg>
-    ),
-  },
 ];
 
 export function Certificates() {

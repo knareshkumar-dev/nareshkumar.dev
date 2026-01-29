@@ -93,37 +93,7 @@ export function About() {
               </p>
             </motion.div>
 
-            {/* Education Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-              className="bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-5 hover:border-primary/50 transition-colors group"
-            >
-              <div className="flex items-start gap-3 sm:gap-4">
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 10 }}
-                  className="p-2 sm:p-3 bg-primary/10 rounded-lg shrink-0 group-hover:bg-primary/20 transition-colors"
-                >
-                  <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
-                </motion.div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-1">Education</h4>
-                  <p className="text-foreground font-medium text-sm sm:text-base">
-                    Master of Computer Applications (MCA)
-                  </p>
-                  <p className="text-muted-foreground text-xs sm:text-sm mt-1">
-                    BS Abdur Rahman Crescent Institute, Chennai
-                  </p>
-                  <div className="flex items-center gap-2 mt-2 text-xs sm:text-sm text-muted-foreground">
-                    <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span>2022 – 2024</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+            {/* Education Card removed — user requested only CODE99 certificate (no MCA) */}
 
             {/* Course Card */}
             <motion.div

@@ -13,15 +13,6 @@ const experiences = [
     skills: ["React", "Node.js", "Express", "MongoDB", "REST APIs", "JWT Auth"],
     type: "education",
   },
-  {
-    title: "Master of Computer Applications (MCA)",
-    company: "BS Abdur Rahman Crescent Institute",
-    period: "2022 – 2024",
-    description:
-      "Pursued advanced studies in computer science with focus on software development, database management, and web technologies.",
-    skills: ["Data Structures", "Algorithms", "Database Systems", "Web Development"],
-    type: "education",
-  },
 ];
 
 export function Experience() {
