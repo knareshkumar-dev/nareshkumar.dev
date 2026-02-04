@@ -1,7 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,24 +21,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Send email using Resend
-    await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>',
-      to: ['knareshkumar.dev@gmail.com'],
-      subject: `New Contact Form Message from ${name}`,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
-      `,
-    });
+    // Log the contact form data (since contact form was removed)
+    console.log('Contact form submission:', { name, email, message });
     
     return NextResponse.json(
       { 
         success: true, 
-        message: 'Message sent successfully! I will get back to you soon.' 
+        message: 'Message received! I will get back to you soon.' 
       },
       { status: 200 }
     );
