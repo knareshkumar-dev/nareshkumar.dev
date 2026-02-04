@@ -26,14 +26,12 @@ const projects: Project[] = [
     title: "Flight Booking Application",
     subtitle: "MERN Stack",
     description:
-      "A comprehensive flight booking platform that allows users to search, compare, and book flights with ease. Features a robust admin panel for managing flights and bookings.",
+      "A full stack web application for searching and booking flights.",
     features: [
-      "User Authentication & Authorization",
-      "Flight Search & Filtering",
-      "Fare Comparison",
-      "Seat Selection",
-      "Booking Management",
-      "Admin Panel",
+      "Built responsive UI using React",
+      "Implemented user login and booking flow",
+      "Integrated REST APIs for data",
+      "Created admin panel for managing flights",
     ],
     tech: ["MongoDB", "Express", "React", "Node.js", "JWT", "REST API"],
     icon: (
@@ -54,19 +52,17 @@ const projects: Project[] = [
   },
   {
     id: 2,
-    title: "ShopEZ",
-    subtitle: "E-commerce Application (MERN)",
+    title: "ShopEZ – E-commerce Application",
+    subtitle: "E-commerce Application",
     description:
-      "A full-featured e-commerce platform with separate dashboards for users and sellers. Supports product reviews, discounts, and a seamless checkout experience.",
+      "A simple e-commerce platform built using MERN stack.",
     features: [
-      "Product Listing & Search",
-      "Reviews & Ratings",
-      "Discount Coupons",
-      "Shopping Cart & Checkout",
-      "User Dashboard",
-      "Seller Dashboard",
+      "Product listing and cart system",
+      "User dashboard",
+      "Checkout flow",
+      "Focused on frontend logic",
     ],
-    tech: ["MongoDB", "Express", "React", "Node.js", "Stripe", "REST API"],
+    tech: ["MongoDB", "Express", "React", "Node.js", "REST API"],
     icon: (
       <svg
         className="w-8 h-8"

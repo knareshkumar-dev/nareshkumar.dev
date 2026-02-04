@@ -35,14 +35,14 @@ const skillCategories = [
   {
     title: "Tools",
     icon: Wrench,
-    skills: ["Git", "GitHub", "Postman"],
+    skills: ["Git", "GitHub", "Postman", "VS Code"],
     color: "text-rose-400",
     bgColor: "bg-rose-400/10",
   },
   {
-    title: "APIs & Auth",
+    title: "Concepts",
     icon: Shield,
-    skills: ["REST", "JWT"],
+    skills: ["REST APIs", "JWT (basic)", "Responsive Design", "CRUD", "API Integration"],
     color: "text-indigo-400",
     bgColor: "bg-indigo-400/10",
   },
@@ -155,13 +155,12 @@ export function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6"
+          className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6"
         >
           {[
-            { label: "Years Experience", value: "1.6+" },
-            { label: "Technologies", value: "10+" },
-            { label: "Projects Built", value: "5+" },
-            { label: "Lines of Code", value: "50K+" },
+            { label: "Projects Built", value: "2+" },
+            { label: "Technologies Learned", value: "10+" },
+            { label: "2024 Graduate", value: "Fresh" },
           ].map((stat, idx) => (
             <motion.div
               key={stat.label}

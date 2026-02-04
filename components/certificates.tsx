@@ -8,7 +8,7 @@ const certificates = [
     id: 1,
     title: "Full Stack Developer Certification",
     issuer: "CODE99 IT Academy",
-    date: "June 2025",
+    date: "2025",
     description: "Completed intensive training in MERN stack development",
     icon: (
       <svg

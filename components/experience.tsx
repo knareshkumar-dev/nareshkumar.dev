@@ -25,7 +25,7 @@ export function Experience() {
             as="h2"
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4"
           >
-            Experience and Education
+            Project Experience
           </TextReveal>
           <motion.div
             initial={{ scaleX: 0 }}
@@ -41,7 +41,7 @@ export function Experience() {
             viewport={{ once: true }}
             className="text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base"
           >
-            My professional journey and academic background
+            My training and project development journey
           </motion.p>
         </div>
 
@@ -111,7 +111,7 @@ export function Experience() {
                           : "bg-accent/20 text-accent group-hover:bg-accent/30"
                       }`}
                     >
-                      {exp.type === "work" ? "Work Experience" : "Education"}
+                      {exp.type === "work" ? "Work Experience" : "Training"}
                     </motion.span>
 
                     {/* Period */}

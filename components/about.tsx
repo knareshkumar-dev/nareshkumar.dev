@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { GraduationCap, Briefcase, MapPin, Calendar } from "lucide-react";
 import { TextReveal } from "@/components/text-reveal";
 import { ImageReveal } from "@/components/image-reveal";
+import { ResumeDownload } from "@/components/resume-download";
+import { CopyPhoneButton } from "@/components/copy-phone-button";
 
 export function About() {
   return (
@@ -53,15 +55,13 @@ export function About() {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="text-center p-6 sm:p-8">
-                    <motion.div
-                      className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center border-2 border-primary/30"
-                      whileHover={{ rotate: 10, scale: 1.05 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <span className="text-3xl sm:text-5xl font-bold text-primary">NK</span>
-                    </motion.div>
-                    <p className="text-base sm:text-lg font-medium text-foreground">Naresh Kumar K</p>
-                    <p className="text-sm sm:text-base text-muted-foreground">Full Stack Developer</p>
+                      <img
+                        src="/Naresh_Kumar_K.png"
+                        alt="Naresh Kumar"
+                        className="w-40 h-40 sm:w-48 sm:h-48 rounded-full object-cover mx-auto profile-hover"
+                      />
+                      <p className="text-base sm:text-lg font-medium text-foreground mt-4">Naresh Kumar K</p>
+                      <p className="text-sm sm:text-base text-muted-foreground">Full Stack Developer</p>
                   </div>
                 </motion.div>
               </ImageReveal>
@@ -84,13 +84,18 @@ export function About() {
               viewport={{ once: true }}
             >
               <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 md:mb-3">
-                Hello! I&apos;m Naresh
+                Hello, I&apos;m Naresh 👋
               </h3>
               <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
-                A passionate Full Stack Developer specializing in the MERN stack. 
-                With 1.6 years of hands-on experience, I love building web applications 
-                that solve real-world problems and deliver exceptional user experiences.
+                A fresher Full Stack Developer specializing in the MERN stack. 
+                I have completed professional training and built multiple academic and personal projects. 
+                I focus mainly on frontend development with basic backend knowledge.
               </p>
+              <p className="text-muted-foreground leading-relaxed text-sm sm:text-base mt-3">
+                I am passionate about learning, writing clean code, and building real-world applications.
+              </p>
+              <div className="mt-6 flex items-center gap-3 flex-wrap justify-start">
+              </div>
             </motion.div>
 
             {/* Education Card removed — user requested only CODE99 certificate (no MCA) */}
@@ -112,7 +117,7 @@ export function About() {
                   <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                 </motion.div>
                 <div>
-                  <h4 className="font-semibold text-foreground mb-1">Course</h4>
+                  <h4 className="font-semibold text-foreground mb-1">Training</h4>
                   <p className="text-foreground font-medium text-sm sm:text-base">
                     Full Stack Developer Trainee
                   </p>
@@ -126,8 +131,13 @@ export function About() {
                     </div>
                     <div className="flex items-center gap-2">
                       <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
-                      <span>India</span>
+                      <span>Chennai, Tamil Nadu</span>
                     </div>
+                  </div>
+                  <div className="mt-3 text-xs sm:text-sm text-muted-foreground">
+                    <p>• Trained in MERN stack fundamentals</p>
+                    <p>• Built real-world projects</p>
+                    <p>• Learned REST APIs and authentication basics</p>
                   </div>
                 </div>
               </div>

@@ -6,7 +6,6 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MagneticButton } from "@/components/magnetic-button";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -134,6 +133,7 @@ export function Hero() {
 
       {/* Content Layer (foreground - fastest parallax) */}
       <div ref={contentRef} className="max-w-4xl mx-auto text-center relative z-10 px-4">
+        {/* (Profile moved to About section) */}
         {/* Greeting Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -171,7 +171,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
         >
-          Full Stack Developer 
+          Fresher Full Stack Developer (MERN)
         </motion.p>
 
         {/* Summary */}
@@ -181,23 +181,8 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.9 }}
         >
-          Full Stack Developer (MERN) crafting high-performance web applications with a strong focus on usability, scalability, and maintainable code.
+          Fresher web developer focused on building responsive and user-friendly applications using React and modern web technologies. Actively seeking an entry-level frontend or full stack role.
         </motion.p>
-
-        {/* CTA Buttons with Magnetic Effect */}
-        <motion.div
-          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1 }}
-        >
-          <MagneticButton href="#projects" variant="primary" strength={0.3}>
-            View Projects
-          </MagneticButton>
-          <MagneticButton href="#contact" variant="outline" strength={0.3}>
-            Contact Me
-          </MagneticButton>
-        </motion.div>
 
         {/* Scroll Indicator */}
         <motion.div

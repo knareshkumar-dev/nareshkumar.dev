@@ -1,11 +1,8 @@
 "use client";
 
-import React from "react"
-
-import { useState, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { gsap } from "gsap";
+import { motion } from "framer-motion";
 import { TextReveal } from "@/components/text-reveal";
+import { CopyPhoneButton } from "@/components/copy-phone-button";
 
 const contactInfo = [
   {
@@ -100,170 +97,7 @@ const contactInfo = [
   },
 ];
 
-interface FormData {
-  name: string;
-  email: string;
-  message: string;
-}
-
-function FloatingInput({
-  label,
-  type = "text",
-  value,
-  onChange,
-  required = false,
-}: {
-  label: string;
-  type?: string;
-  value: string;
-  onChange: (value: string) => void;
-  required?: boolean;
-}) {
-  const [isFocused, setIsFocused] = useState(false);
-  const isActive = isFocused || value.length > 0;
-  const inputId = `input-${label.toLowerCase().replace(/\s+/g, "-")}`;
-
-  return (
-    <div className="relative">
-      <motion.input
-        whileFocus={{ y: -2 }}
-        id={inputId}
-        type={type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        required={required}
-        aria-label={label}
-        aria-required={required}
-        className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-secondary/50 border border-border rounded-lg text-sm sm:text-base text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all peer"
-      />
-      <motion.label
-        htmlFor={inputId}
-        initial={false}
-        animate={{
-          y: isActive ? -24 : 0,
-          scale: isActive ? 0.85 : 1,
-          color: isFocused ? "var(--primary)" : "var(--muted-foreground)",
-        }}
-        className="absolute left-4 top-3 origin-left pointer-events-none bg-background px-1"
-      >
-        {label}
-        {required && <span className="text-destructive ml-1">*</span>}
-      </motion.label>
-    </div>
-  );
-}
-
-function FloatingTextarea({
-  label,
-  value,
-  onChange,
-  required = false,
-}: {
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  required?: boolean;
-}) {
-  const [isFocused, setIsFocused] = useState(false);
-  const isActive = isFocused || value.length > 0;
-  const textareaId = `textarea-${label.toLowerCase().replace(/\s+/g, "-")}`;
-
-  return (
-    <div className="relative">
-      <textarea
-        id={textareaId}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        required={required}
-        aria-label={label}
-        aria-required={required}
-        rows={5}
-        className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-lg text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none"
-      />
-      <motion.label
-        htmlFor={textareaId}
-        initial={false}
-        animate={{
-          y: isActive ? -24 : 0,
-          scale: isActive ? 0.85 : 1,
-          color: isFocused ? "var(--primary)" : "var(--muted-foreground)",
-        }}
-        className="absolute left-4 top-3 origin-left pointer-events-none bg-background px-1"
-      >
-        {label}
-        {required && <span className="text-destructive ml-1">*</span>}
-      </motion.label>
-    </div>
-  );
-}
-
 export function Contact() {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const submitButtonRef = useRef<HTMLButtonElement>(null);
-
-  const handleButtonMouseMove = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!submitButtonRef.current || isSubmitting || isSubmitted) return;
-    const rect = submitButtonRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-
-    gsap.to(submitButtonRef.current, {
-      x: x * 0.2,
-      y: y * 0.2,
-      duration: 0.3,
-      ease: "power2.out",
-    });
-  }, [isSubmitting, isSubmitted]);
-
-  const handleButtonMouseLeave = useCallback(() => {
-    if (!submitButtonRef.current) return;
-    gsap.to(submitButtonRef.current, {
-      x: 0,
-      y: 0,
-      duration: 0.5,
-      ease: "elastic.out(1, 0.3)",
-    });
-  }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-        setTimeout(() => {
-          setIsSubmitted(false);
-          setFormData({ name: "", email: "", message: "" });
-        }, 3000);
-      } else {
-        setIsSubmitting(false);
-        alert('Failed to send message. Please try again.');
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      setIsSubmitting(false);
-      alert('An error occurred. Please try again later.');
-    }
-  };
-
   return (
     <section id="contact" className="py-20 lg:py-28">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -273,7 +107,7 @@ export function Contact() {
             as="h2"
             className="text-3xl sm:text-4xl font-bold text-foreground mb-4"
           >
-            Get In Touch
+            Contact
           </TextReveal>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -282,37 +116,37 @@ export function Contact() {
             viewport={{ once: true }}
             className="text-muted-foreground max-w-2xl mx-auto"
           >
-            Have a project in mind or want to collaborate? Feel free to reach out!
-          </motion.p>
+            Open for work. Feel free to connect.          </motion.p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+        <div className="max-w-4xl mx-auto">
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
+            className="text-center"
           >
-            <h3 className="text-2xl font-bold text-foreground mb-6">
+            {/* <h3 className="text-2xl font-bold text-foreground mb-6">
               Contact Information
             </h3>
             <p className="text-muted-foreground mb-8">
               I&apos;m currently open to new opportunities and collaborations.
               Whether you have a question or just want to say hi, I&apos;ll try my
               best to get back to you!
-            </p>
+            </p> */}
 
-            <div className="space-y-4 sm:space-y-6">
-              {contactInfo.map((info, index) => (
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 max-w-lg mx-auto">
+              {contactInfo.slice(0, 4).map((info, index) => (
                 <motion.div
                   key={info.label}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  whileHover={{ x: 5 }}
+                  whileHover={{ y: -2 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="flex items-center gap-3 sm:gap-4 group"
+                  className="flex flex-col items-center gap-3 group p-4 bg-card border border-border rounded-lg hover:border-primary/50 transition-colors"
                 >
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 10 }}
@@ -320,149 +154,31 @@ export function Contact() {
                   >
                     {info.icon}
                   </motion.div>
-                  <div className="min-w-0">
-                    <p className="text-xs sm:text-sm text-muted-foreground">{info.label}</p>
-                    {info.href ? (
-                      <a
-                        href={info.href}
-                        target={info.href.startsWith("http") ? "_blank" : undefined}
-                        rel={
-                          info.href.startsWith("http")
-                            ? "noopener noreferrer"
-                            : undefined
-                        }
-                        className="text-sm sm:text-base text-foreground hover:text-primary transition-colors truncate"
-                      >
-                        {info.value}
-                      </a>
-                    ) : (
-                      <p className="text-sm sm:text-base text-foreground">{info.value}</p>
-                    )}
+                  <div className="text-center min-w-0">
+                    <p className="text-xs text-muted-foreground mb-1">{info.label}</p>
+                    <div className="flex items-center justify-center gap-2">
+                      {info.href ? (
+                        <a
+                          href={info.href}
+                          target={info.href.startsWith("http") ? "_blank" : undefined}
+                          rel={
+                            info.href.startsWith("http")
+                              ? "noopener noreferrer"
+                              : undefined
+                          }
+                          className="text-xs sm:text-sm text-foreground hover:text-primary transition-colors break-words"
+                        >
+                          {info.value}
+                        </a>
+                      ) : (
+                        <p className="text-xs sm:text-sm text-foreground break-words">{info.value}</p>
+                      )}
+                      {info.label === "Phone" && <CopyPhoneButton />}
+                    </div>
                   </div>
                 </motion.div>
               ))}
             </div>
-
-            {/* Decorative Element */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-8 sm:mt-12 p-4 sm:p-6 bg-card border border-border rounded-lg sm:rounded-xl hover:border-primary/50 transition-colors"
-            >
-              <p className="text-muted-foreground text-xs sm:text-sm italic">
-                &quot;The best way to predict the future is to create it.&quot;
-              </p>
-              <p className="text-primary text-xs sm:text-sm mt-2">- Peter Drucker</p>
-            </motion.div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
-          >
-            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-              <FloatingInput
-                label="Your Name"
-                value={formData.name}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, name: value }))
-                }
-                required
-              />
-
-              <FloatingInput
-                label="Your Email"
-                type="email"
-                value={formData.email}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, email: value }))
-                }
-                required
-              />
-
-              <FloatingTextarea
-                label="Your Message"
-                value={formData.message}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, message: value }))
-                }
-                required
-              />
-
-              {/* Submit Button with Magnetic Effect */}
-              <motion.button
-                ref={submitButtonRef}
-                type="submit"
-                disabled={isSubmitting || isSubmitted}
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: isSubmitting || isSubmitted ? 1 : 0.98 }}
-                onMouseMove={handleButtonMouseMove}
-                onMouseLeave={handleButtonMouseLeave}
-                className="w-full py-3 sm:py-4 bg-primary text-primary-foreground font-semibold rounded-lg relative overflow-hidden disabled:opacity-70 transition-opacity text-sm sm:text-base"
-              >
-                <AnimatePresence mode="wait">
-                  {isSubmitting ? (
-                    <motion.div
-                      key="submitting"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      className="flex items-center justify-center gap-2"
-                    >
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{
-                          duration: 1,
-                          repeat: Number.POSITIVE_INFINITY,
-                          ease: "linear",
-                        }}
-                        className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-primary-foreground border-t-transparent rounded-full"
-                      />
-                      Sending...
-                    </motion.div>
-                  ) : isSubmitted ? (
-                    <motion.div
-                      key="submitted"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      className="flex items-center justify-center gap-2"
-                    >
-                      <motion.svg
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        className="w-4 h-4 sm:w-5 sm:h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </motion.svg>
-                      Message Sent!
-                    </motion.div>
-                  ) : (
-                    <motion.span
-                      key="default"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                    >
-                      Send Message
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </motion.button>
-            </form>
           </motion.div>
         </div>
       </div>

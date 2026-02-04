@@ -127,3 +127,14 @@
     overflow-x: hidden;
   }
 }
+
+/* Profile image hover: subtle lift, color reveal and soft shadow */
+.profile-hover {
+  transition: transform 220ms cubic-bezier(.2,.9,.2,1), filter 220ms ease, box-shadow 220ms ease;
+  filter: grayscale(40%) contrast(0.95) saturate(0.95);
+}
+.profile-hover:hover {
+  transform: translateY(-6px) rotate(-1deg) scale(1.03);
+  filter: grayscale(0) contrast(1) saturate(1.03);
+  box-shadow: 0 12px 30px rgba(2,6,23,0.12);
+}

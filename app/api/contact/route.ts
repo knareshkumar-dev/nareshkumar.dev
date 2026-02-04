@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
@@ -21,26 +24,31 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Here you would integrate with your email service
-    // For example, using Nodemailer, SendGrid, Resend, etc.
-    
-    // Placeholder: Log the contact form data
-    console.log('Contact form submission:', { name, email, message });
-
-    // Mock email sending
-    // In production, use: await sendEmail({ to: email, subject: '...', body: '...' });
+    // Send email using Resend
+    await resend.emails.send({
+      from: 'Portfolio Contact <onboarding@resend.dev>',
+      to: ['knareshkumar.dev@gmail.com'],
+      subject: `New Contact Form Message from ${name}`,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message.replace(/\n/g, '<br>')}</p>
+      `,
+    });
     
     return NextResponse.json(
       { 
         success: true, 
-        message: 'Message received! I will get back to you soon.' 
+        message: 'Message sent successfully! I will get back to you soon.' 
       },
       { status: 200 }
     );
   } catch (error) {
     console.error('Contact form error:', error);
     return NextResponse.json(
-      { error: 'Failed to submit form. Please try again.' },
+      { error: 'Failed to send message. Please try again.' },
       { status: 500 }
     );
   }

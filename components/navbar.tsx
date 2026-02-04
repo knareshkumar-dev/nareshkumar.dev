@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const navLinks = [
+  { href: "/", label: "Home" },
   { href: "#about", label: "About" },
   { href: "#projects", label: "Projects" },
   { href: "#contact", label: "Contact" },
@@ -96,8 +97,8 @@ export function Navbar() {
               </motion.div>
             ))}
             <ThemeToggle />
-            <MagneticNavButton href="#contact">
-              Get in Touch
+            <MagneticNavButton href="/knareshkumar.dev.pdf">
+              Resume
             </MagneticNavButton>
           </div>
 
@@ -170,12 +171,21 @@ export function Navbar() {
                   className="pt-2"
                 >
                   <Link
-                    href="#contact"
+                    href="/knareshkumar.dev.pdf"
                     className="block px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors text-center"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Get in Touch
+                    Resume
                   </Link>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -30 }}
+                  transition={{ duration: 0.3, delay: (navLinks.length + 1) * 0.08, ease: "easeOut" }}
+                  className="pt-2"
+                >
+                  <ThemeToggle />
                 </motion.div>
               </div>
             </motion.div>
